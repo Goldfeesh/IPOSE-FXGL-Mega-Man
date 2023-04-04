@@ -8,7 +8,6 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.example.ipose_megaman.EntityTypes;
-import com.almasb.fxgl.parser.text.TextLevelParser
 
 import java.util.Map;
 
@@ -18,13 +17,14 @@ public class Main extends GameApplication {
 
     private Entity player;
 
+    private static final int LEVEL = 0;
+
     @Override
     protected void initSettings(GameSettings settings) {
-//        SETTING
-        settings.setHeight(10*16);
-        settings.setWidth(15*16);
-        settings.setTitle("Hello World");
-        settings.setVersion("");
+        settings.setHeight(10 * 70);
+        settings.setWidth(15 * 70);
+        settings.setTitle("Mega Man, but AWESOME!");
+        settings.setVersion("1.0");
     }
 
     @Override
@@ -42,10 +42,12 @@ public class Main extends GameApplication {
 //        FXGL.getGameTimer().runAtInterval(() -> {
 //                RANDOM INT: int randomPos = ThreadLocalRandom.current().nextInt(0, FXGL.getGameScene().getAppWidth() -180);
 //        }, Duration.millis(500));
-        TextLevelParser parser = new TextLevelParser(new MegaManFactory());
-        Level level = parser.parse("megaman.json");
-        getGameWorld().setLevel(level);
+        getGameWorld().addEntityFactory(new MegaManFactory());
 
+        FXGL.setLevelFromMap("map.tmx");
+        if (LEVEL == 0) {
+
+        }
     }
 
     @Override

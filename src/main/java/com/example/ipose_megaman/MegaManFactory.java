@@ -10,11 +10,11 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
 public class MegaManFactory implements EntityFactory {
-
     @Spawns("platform")
-    public Entity platform(SpawnData data) {
+    public Entity newPlatform(SpawnData data) {
         return FXGL.entityBuilder()
-                .bbox(new HitBox(BoundingShape.box(data.get("width"), data.<Integer>get("height"))))
+                //Dit zijn blijkbaar de "key height" en "key width"
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(new PhysicsComponent())
                 .build();
     }
