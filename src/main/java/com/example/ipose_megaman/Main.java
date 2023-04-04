@@ -6,11 +6,18 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.level.Level;
+import com.almasb.fxgl.input.Input;
+import com.almasb.fxgl.input.UserAction;
+import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.example.ipose_megaman.EntityTypes;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.Map;
 
+import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameWorld;
 
 public class Main extends GameApplication {
@@ -45,9 +52,14 @@ public class Main extends GameApplication {
         getGameWorld().addEntityFactory(new MegaManFactory());
 
         FXGL.setLevelFromMap("map.tmx");
-        if (LEVEL == 0) {
+//        if (LEVEL == 0) {
+//
+//        }
 
-        }
+        player = FXGL.entityBuilder()
+                .at(300, 300)
+                .view(new Rectangle(30, 50, Color.BLUE))
+                .buildAndAttach();
     }
 
     @Override
@@ -65,6 +77,22 @@ public class Main extends GameApplication {
 
     @Override
     protected void initInput(){
+        Input input = FXGL.getInput();
+
+        input.addAction(new UserAction("Move Right") {
+            @Override
+            protected void onAction() {
+                player.translateX(3);
+            }
+        }, KeyCode.D);
+
+        input.addAction(new UserAction("Move Left") {
+            @Override
+            protected void onAction() {
+                player.translateX(-3);
+            }
+        }, KeyCode.A);
+
         // User Input
     }
 
