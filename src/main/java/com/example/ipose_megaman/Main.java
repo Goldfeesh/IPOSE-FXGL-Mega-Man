@@ -5,10 +5,14 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.example.ipose_megaman.EntityTypes;
+import com.almasb.fxgl.parser.text.TextLevelParser
 
 import java.util.Map;
+
+import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameWorld;
 
 public class Main extends GameApplication {
 
@@ -16,11 +20,11 @@ public class Main extends GameApplication {
 
     @Override
     protected void initSettings(GameSettings settings) {
-//        SETTINGS
-//        settings.setHeight(1080);
-//        settings.setWidth(1920);
-//        settings.setTitle("Hello World");
-//        settings.setVersion("");
+//        SETTING
+        settings.setHeight(10*16);
+        settings.setWidth(15*16);
+        settings.setTitle("Hello World");
+        settings.setVersion("");
     }
 
     @Override
@@ -38,6 +42,10 @@ public class Main extends GameApplication {
 //        FXGL.getGameTimer().runAtInterval(() -> {
 //                RANDOM INT: int randomPos = ThreadLocalRandom.current().nextInt(0, FXGL.getGameScene().getAppWidth() -180);
 //        }, Duration.millis(500));
+        TextLevelParser parser = new TextLevelParser(new MegaManFactory());
+        Level level = parser.parse("megaman.json");
+        getGameWorld().setLevel(level);
+
     }
 
     @Override
