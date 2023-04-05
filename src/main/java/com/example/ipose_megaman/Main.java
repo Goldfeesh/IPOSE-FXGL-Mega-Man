@@ -17,6 +17,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 import java.util.Map;
 
@@ -97,6 +98,7 @@ public class Main extends GameApplication {
         });
     }
 
+    private boolean canShoot = true;
     @Override
     protected void initInput(){
         Input input = FXGL.getInput();
@@ -135,16 +137,24 @@ public class Main extends GameApplication {
             }
         }, KeyCode.W);
 
+
+
         input.addAction(new UserAction("Shoot") {
+
             @Override
             protected void onAction() {
-                player.getComponent(PlayerComponent.class).shoot(player.getRightX(), player.getBottomY() - player.getHeight()/2);
-
+                if (canShoot) {
+                    player.getComponent(PlayerComponent.class).shoot(player.getRightX(), player.getBottomY() - player.getHeight() / 2);
+                canShoot = false;
+                }
             }
+
             protected void onActionEnd() {
+                canShoot = true;
                 player.getComponent(PlayerComponent.class).stop();
             }
         }, KeyCode.Z);
+
         // User Input
     }
 
