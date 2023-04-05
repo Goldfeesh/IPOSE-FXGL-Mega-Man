@@ -2,6 +2,7 @@ package com.example.ipose_megaman;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.texture.Texture;
 import javafx.scene.image.Image;
 
 import static com.almasb.fxgl.dsl.FXGL.image;
@@ -12,11 +13,12 @@ public class PlayerComponent extends Component {
 
     public PhysicsComponent physics;
 
+    public Texture texture;
+
     public PlayerComponent(){
-        Image image = image("MegaManIdle.png");
-
+        Image image = image("assets/textures/MegaManIdle.png");
+        texture = new Texture(image);
     }
-
 
     public void left() {
         getEntity().setScaleX(-1);
