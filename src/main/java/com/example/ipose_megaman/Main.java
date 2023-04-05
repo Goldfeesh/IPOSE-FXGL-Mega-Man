@@ -24,6 +24,7 @@ import java.util.Map;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameWorld;
 import static com.example.ipose_megaman.EntityTypes.BULLET;
+import static javafx.application.Platform.exit;
 
 public class Main extends GameApplication {
 
@@ -56,7 +57,7 @@ public class Main extends GameApplication {
 //        }, Duration.millis(500));
         getGameWorld().addEntityFactory(new MegaManFactory());
 
-        FXGL.setLevelFromMap("level1.tmx");
+        FXGL.setLevelFromMap("map.tmx");
 //        if (LEVEL == 0) {
 //
 //        }
@@ -94,6 +95,20 @@ public class Main extends GameApplication {
             @Override
             protected void onCollision(Entity Player, Entity Platform) {
 
+            }
+        });
+
+        FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER, EntityTypes.ENEMY) {
+            @Override
+            protected void onCollision(Entity player, Entity enemy) {
+                exit();
+            }
+        });
+
+        FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.BULLET, EntityTypes.ENEMY) {
+            @Override
+            protected void onCollision(Entity bullet, Entity enemy) {
+                enemy.removeFromWorld();
             }
         });
     }
