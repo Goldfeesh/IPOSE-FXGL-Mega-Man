@@ -27,12 +27,12 @@ public class PlayerComponent extends Component {
     }
 
     public void left() {
-        getEntity().setScaleX(2.5);
+        getEntity().setScaleX(-2.5);
         physics.setVelocityX(-300);
     }
 
     public void right() {
-        getEntity().setScaleX(-2.5);
+        getEntity().setScaleX(2.5);
         physics.setVelocityX(300);
     }
 
@@ -57,7 +57,5 @@ public class PlayerComponent extends Component {
                 .collidable()
                 .with(new ProjectileComponent(new Point2D(1.0, 0.0), 350.0))
                 .buildAndAttach();
-
-
     }
 }
