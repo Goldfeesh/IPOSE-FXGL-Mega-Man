@@ -4,6 +4,7 @@ import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.level.Level;
@@ -12,6 +13,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
 import com.example.ipose_megaman.EntityTypes;
+import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -20,6 +22,7 @@ import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameWorld;
+import static com.example.ipose_megaman.EntityTypes.BULLET;
 
 public class Main extends GameApplication {
 
@@ -127,8 +130,20 @@ public class Main extends GameApplication {
                 player.getComponent(PlayerComponent.class).stop();
             }
         }, KeyCode.W);
+
+        input.addAction(new UserAction("Shoot") {
+            @Override
+            protected void onAction() {
+                player.getComponent(PlayerComponent.class).shoot(player.getRightX(), player.getBottomY() - player.getHeight()/2);
+
+            }
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
+            }
+        }, KeyCode.Z);
         // User Input
     }
+
 
     @Override
     protected void initUI() {
