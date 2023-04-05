@@ -26,6 +26,14 @@ public class PlayerComponent extends Component {
         texture = new Texture(image);
     }
 
+    @Override
+    public void onAdded() {
+        physics.onGroundProperty().addListener((obs, old, isOnGround) -> {
+            if (isOnGround) {
+                jumps = 1;
+            }
+        });
+    }
     public void left() {
         getEntity().setScaleX(-2.5);
         physics.setVelocityX(-300);
@@ -42,7 +50,7 @@ public class PlayerComponent extends Component {
 
         physics.setVelocityY(-500);
 
-        //jumps--;
+        jumps--;
     }
 
     public void stop() {

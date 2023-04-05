@@ -11,6 +11,7 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
+import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -32,6 +33,7 @@ public class MegaManFactory implements EntityFactory {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
         physics.setFixtureDef(new FixtureDef().friction(0.0f));
+        physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 16), BoundingShape.box(6, 8)));
 
         PlayerComponent playerComponent = new PlayerComponent();
         return FXGL.entityBuilder(data)
