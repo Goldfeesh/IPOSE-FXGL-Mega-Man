@@ -8,12 +8,24 @@ import static com.almasb.fxgl.dsl.FXGL.image;
 
 public class PlayerComponent extends Component {
 
-    /*private int jumps = 1;
+    public int jumps = 1;
 
-    private PhysicsComponent physics;
+    public PhysicsComponent physics;
 
     public PlayerComponent(){
-        Image image = image("player.png");
+        Image image = image("MegaManIdle.png");
+
+    }
+
+
+    public void left() {
+        getEntity().setScaleX(-1);
+        physics.setVelocityX(-170);
+    }
+
+    public void right() {
+        getEntity().setScaleX(1);
+        physics.setVelocityX(170);
     }
 
     public void jump() {
@@ -22,6 +34,10 @@ public class PlayerComponent extends Component {
 
         physics.setVelocityY(-300);
 
-        jumps--;
-    }*/
+        //jumps--;
+    }
+
+    public void stop() {
+        physics.setVelocityX(0);
+    }
 }

@@ -16,6 +16,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.net.URL;
+
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 import static com.example.ipose_megaman.EntityTypes.PLAYER;
 
@@ -33,10 +35,14 @@ public class MegaManFactory implements EntityFactory {
     public Entity newPlayer(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
+        physics.setFixtureDef(new FixtureDef().friction(0.0f));
 
-        return FXGL.entityBuilder()
-                .viewWithBBox(new Rectangle(30, 50, Color.BLUE))
+        PlayerComponent playerComponent = new PlayerComponent();
+        return FXGL.entityBuilder(data)
+                .viewWithBBox("MegaManIdle.png")
                 .with(physics)
+                .collidable()
+                .with(playerComponent)
                 .build();
     }
 

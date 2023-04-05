@@ -94,20 +94,39 @@ public class Main extends GameApplication {
     protected void initInput(){
         Input input = FXGL.getInput();
 
+
         input.addAction(new UserAction("Move Right") {
             @Override
             protected void onAction() {
-                player.translateX(3);
+                player.getComponent(PlayerComponent.class).right();
+
+            }
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
             }
         }, KeyCode.D);
 
         input.addAction(new UserAction("Move Left") {
             @Override
             protected void onAction() {
-                player.translateX(-3);
+                player.getComponent(PlayerComponent.class).left();
+            }
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
             }
         }, KeyCode.A);
 
+
+        input.addAction(new UserAction("Jump") {
+            @Override
+            protected void onAction() {
+                player.getComponent(PlayerComponent.class).jump();
+
+            }
+            protected void onActionEnd() {
+                player.getComponent(PlayerComponent.class).stop();
+            }
+        }, KeyCode.W);
         // User Input
     }
 
