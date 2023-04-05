@@ -29,22 +29,15 @@ public class MegaManFactory implements EntityFactory {
                 .build();
     }
 
-    //@Spawns("player)")
-    //public Entity newPlayer(SpawnData data) {
-      //  return FXGL.entityBuilder()
-
-    //}
-
     @Spawns("player")
-    public Entity newPlayer(SpawnData data){
+    public Entity newPlayer(SpawnData data) {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
 
         return FXGL.entityBuilder()
-                .viewWithBBox(new Rectangle(30, 30, Color.BLUE))
+                .viewWithBBox(new Rectangle(30, 50, Color.BLUE))
                 .with(physics)
                 .build();
     }
-
 
 }
