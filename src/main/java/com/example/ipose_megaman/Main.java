@@ -56,7 +56,7 @@ public class Main extends GameApplication {
 //        }, Duration.millis(500));
         getGameWorld().addEntityFactory(new MegaManFactory());
 
-        FXGL.setLevelFromMap("map.tmx");
+        FXGL.setLevelFromMap("level1.tmx");
 //        if (LEVEL == 0) {
 //
 //        }
