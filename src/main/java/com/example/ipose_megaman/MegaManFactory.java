@@ -31,7 +31,7 @@ public class MegaManFactory implements EntityFactory {
 
         PlayerComponent playerComponent = new PlayerComponent();
         return FXGL.entityBuilder(data)
-                .viewWithBBox("MegaManIdle.png")
+                .viewWithBBox("MegaManIdle.png").scale(2.5,2.5)
                 .with(physics)
                 .collidable()
                 .with(playerComponent)

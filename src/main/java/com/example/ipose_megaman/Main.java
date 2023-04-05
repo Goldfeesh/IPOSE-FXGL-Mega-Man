@@ -77,6 +77,8 @@ public class Main extends GameApplication {
 
     @Override
     protected void initPhysics() {
+        getPhysicsWorld().setGravity(0, 1500);
+
 //        COLLISION HANDLER
 //        FXGL.getPhysicsWorld()
 //                .addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER, Ander entity type) {

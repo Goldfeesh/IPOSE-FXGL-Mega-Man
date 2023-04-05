@@ -27,20 +27,20 @@ public class PlayerComponent extends Component {
     }
 
     public void left() {
-        getEntity().setScaleX(-1);
-        physics.setVelocityX(-170);
+        getEntity().setScaleX(2.5);
+        physics.setVelocityX(-300);
     }
 
     public void right() {
-        getEntity().setScaleX(1);
-        physics.setVelocityX(170);
+        getEntity().setScaleX(-2.5);
+        physics.setVelocityX(300);
     }
 
     public void jump() {
         if (jumps == 0)
             return;
 
-        physics.setVelocityY(-300);
+        physics.setVelocityY(-500);
 
         //jumps--;
     }
