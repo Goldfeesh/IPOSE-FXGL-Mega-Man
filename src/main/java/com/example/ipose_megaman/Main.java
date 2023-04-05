@@ -57,10 +57,12 @@ public class Main extends GameApplication {
 //
 //        }
 
-        player = FXGL.entityBuilder()
+        /*player = FXGL.entityBuilder()
                 .at(300, 300)
                 .view(new Rectangle(30, 50, Color.BLUE))
-                .buildAndAttach();
+                .buildAndAttach();*/
+
+        player = FXGL.getGameWorld().spawn("player", 50, 50);
 
         Viewport viewport = getGameScene().getViewport();
         viewport.setBounds(-1500, 0, 250 * 70, getAppHeight());
@@ -79,6 +81,13 @@ public class Main extends GameApplication {
 //                        FXGL.inc("kills", +1);
 //                    }
 //                });
+
+        FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER,EntityTypes.PLATFORM) {
+            @Override
+            protected void onCollision(Entity Player, Entity Platform) {
+
+            }
+        });
     }
 
     @Override

@@ -13,6 +13,8 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 import static com.example.ipose_megaman.EntityTypes.PLAYER;
@@ -32,5 +34,17 @@ public class MegaManFactory implements EntityFactory {
       //  return FXGL.entityBuilder()
 
     //}
+
+    @Spawns("player")
+    public Entity newPlayer(SpawnData data){
+        PhysicsComponent physics = new PhysicsComponent();
+        physics.setBodyType(BodyType.DYNAMIC);
+
+        return FXGL.entityBuilder()
+                .viewWithBBox(new Rectangle(30, 30, Color.BLUE))
+                .with(physics)
+                .build();
+    }
+
 
 }
