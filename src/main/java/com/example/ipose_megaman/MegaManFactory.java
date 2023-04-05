@@ -27,4 +27,10 @@ public class MegaManFactory implements EntityFactory {
                 .build();
     }
 
+    //@Spawns("player)")
+    //public Entity newPlayer(SpawnData data) {
+      //  return FXGL.entityBuilder()
+
+    //}
+
 }
