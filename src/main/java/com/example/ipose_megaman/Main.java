@@ -12,11 +12,13 @@ import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.CollisionHandler;
+import com.almasb.fxgl.physics.CollisionResult;
 import com.example.ipose_megaman.EntityTypes;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.util.Map;
@@ -31,6 +33,8 @@ public class Main extends GameApplication {
     private Entity player;
 
     private static final int LEVEL = 0;
+
+
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -98,17 +102,28 @@ public class Main extends GameApplication {
             }
         });
 
+
+
         FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER, EntityTypes.ENEMY) {
             @Override
-            protected void onCollision(Entity player, Entity enemy) {
-                exit();
+            protected void onCollisionBegin(Entity player, Entity enemy) {
+                int currentNumberOfLives = (int) geti("numberOfLives");
+                if (currentNumberOfLives == 0){
+                    exit();
+                }
+                int updatedNumberOfLives = currentNumberOfLives - 1;
+                set("numberOfLives",updatedNumberOfLives);
+
             }
         });
+
+
 
         FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.BULLET, EntityTypes.ENEMY) {
             @Override
             protected void onCollision(Entity bullet, Entity enemy) {
                 enemy.removeFromWorld();
+                bullet.removeFromWorld();
             }
         });
     }
@@ -117,7 +132,6 @@ public class Main extends GameApplication {
     @Override
     protected void initInput(){
         Input input = FXGL.getInput();
-
 
         input.addAction(new UserAction("Move Right") {
             @Override
@@ -176,6 +190,13 @@ public class Main extends GameApplication {
 
     @Override
     protected void initUI() {
+        Text numberOfLives = new Text();
+        numberOfLives.setTranslateX(50); // x = 50
+        numberOfLives.setTranslateY(100); // y = 100
+
+        numberOfLives.textProperty().bind(FXGL.getWorldProperties().intProperty("numberOfLives").asString());
+
+        FXGL.getGameScene().addUINode(numberOfLives);
         // UI & LABELS & BACKGROUND
         // MAKE LABEL:  Label myText = new Label("");
         // LINK TO GAME VAR:  myText.textProperty().bind(FXGL.getWorldProperties().intProperty("kills").asString());
@@ -184,7 +205,7 @@ public class Main extends GameApplication {
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
-        // GAME VARIABLES
+        vars.put("numberOfLives",3);        // GAME VARIABLES
     }
 
     public static void main(String[] args) {
