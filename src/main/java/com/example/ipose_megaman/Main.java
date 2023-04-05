@@ -2,6 +2,7 @@ package com.example.ipose_megaman;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.components.CollidableComponent;
@@ -60,6 +61,11 @@ public class Main extends GameApplication {
                 .at(300, 300)
                 .view(new Rectangle(30, 50, Color.BLUE))
                 .buildAndAttach();
+
+        Viewport viewport = getGameScene().getViewport();
+        viewport.setBounds(-1500, 0, 250 * 70, getAppHeight());
+        viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
+        viewport.setLazy(true);
     }
 
     @Override
