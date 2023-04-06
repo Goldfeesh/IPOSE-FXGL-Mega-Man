@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="400" height="20" tilewidth="70" tileheight="70" infinite="0" nextlayerid="3" nextobjectid="102">
+<map version="1.10" tiledversion="1.10.0" orientation="orthogonal" renderorder="right-down" width="400" height="20" tilewidth="70" tileheight="70" infinite="0" nextlayerid="3" nextobjectid="110">
  <tileset firstgid="1" name="tilesheet" tilewidth="70" tileheight="70" tilecount="8" columns="4">
   <image source="tilesheet.png" width="280" height="140"/>
  </tileset>
@@ -119,5 +119,13 @@
   <object id="99" type="enemy" x="4270" y="1190" width="70" height="70"/>
   <object id="100" type="enemy" x="4760" y="840" width="70" height="70"/>
   <object id="101" type="enemy" x="4990.33" y="1250" width="70" height="70"/>
+  <object id="102" type="enemy" x="7070" y="1130" width="70" height="70"/>
+  <object id="103" type="enemy" x="7630" y="1120" width="70" height="70"/>
+  <object id="104" type="enemy" x="8960" y="980" width="70" height="70"/>
+  <object id="105" type="enemy" x="10360" y="1190" width="70" height="70"/>
+  <object id="106" type="enemy" x="10360" y="1120" width="70" height="70"/>
+  <object id="107" type="enemy" x="10360" y="1050" width="70" height="70"/>
+  <object id="108" type="enemy" x="12110" y="1190" width="210" height="70"/>
+  <object id="109" type="enemy" x="13300" y="1120" width="70" height="70"/>
  </objectgroup>
 </map>

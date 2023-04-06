@@ -106,7 +106,7 @@ public class Main extends GameApplication {
 
     @Override
     protected void initPhysics() {
-        getPhysicsWorld().setGravity(0, 1500);
+        getPhysicsWorld().setGravity(0, 1200);
 
 
 
@@ -189,8 +189,8 @@ public class Main extends GameApplication {
             FXGL.getGameScene().setBackgroundRepeat("background1.jpg");
             player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(3500, 950));
         }else if (LEVEL == 2){
-            //FXGL.getGameScene().setBackgroundRepeat("background3");
-            //player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+            FXGL.getGameScene().setBackgroundRepeat("background2.jpg");
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(6900, 650));
         }else if (LEVEL == 3){
 
         }
