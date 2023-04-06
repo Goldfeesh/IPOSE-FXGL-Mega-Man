@@ -73,7 +73,7 @@ public class Main extends GameApplication {
 //        }, Duration.millis(500));
         getGameWorld().addEntityFactory(new MegaManFactory());
 
-        FXGL.setLevelFromMap("level0.tmx");
+        FXGL.setLevelFromMap("level4.tmx");
 
 //        if (LEVEL == 0) {
 //
@@ -210,6 +210,7 @@ public class Main extends GameApplication {
             @Override
             protected void onActionBegin() {
                 if (canShoot) {
+                    FXGL.play("shoot.wav");
                     if (directionRight) {
                         player.getComponent(PlayerComponent.class).shoot(player.getRightX(), player.getBottomY() - player.getHeight() / 2);
                     }else{
