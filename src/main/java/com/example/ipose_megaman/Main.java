@@ -22,6 +22,7 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import com.example.ipose_megaman.EntityTypes;
 import javafx.geometry.Point2D;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
@@ -125,7 +126,9 @@ public class Main extends GameApplication {
             protected void onCollisionBegin(Entity player, Entity enemy) {
                 int currentNumberOfLives = (int) geti("numberOfLives");
                 if (currentNumberOfLives == 0){
-                    exit();
+                    //exit();
+                    getGameController().gotoMainMenu();
+
                 }
                 int updatedNumberOfLives = currentNumberOfLives - 1;
                 set("numberOfLives",updatedNumberOfLives);
