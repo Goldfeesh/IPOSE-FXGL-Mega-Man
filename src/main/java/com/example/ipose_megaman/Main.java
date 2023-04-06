@@ -21,6 +21,8 @@ import com.almasb.fxgl.physics.CollisionResult;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.example.ipose_megaman.EntityTypes;
 import javafx.geometry.Point2D;
+import javafx.scene.control.Button;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.effect.BlendMode;
@@ -163,17 +165,9 @@ public class Main extends GameApplication {
                     LEVEL += 1;
                     setLEVEL();
 
-
                 });
 
-                PrintWriter out = null;
-                try {
-                    out = new PrintWriter(new BufferedWriter(new FileWriter("highscores.txt", true)));
-                    out.println(FXGL.getWorldProperties().getDouble("levelTime").toString());
-                    out.close();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
+
             }
         });
     }
@@ -192,13 +186,29 @@ public class Main extends GameApplication {
             FXGL.getGameScene().setBackgroundRepeat("background2.jpg");
             player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(6900, 650));
         }else if (LEVEL == 3){
+                    getDialogService().showInputBox("Voer je naam in", answer -> {
+                        PrintWriter out = null;
+                        try {
+                            out = new PrintWriter(new BufferedWriter(new FileWriter("highscores.txt", true)));
+                            out.print(answer + " ");
+                            out.print(FXGL.getWorldProperties().getDouble("levelTime").toString());
+                            out.println();
+                            out.close();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        getGameController().gotoMainMenu();
+                    }
+                );
 
         }
     }
 
+
     private boolean canShoot = true;
 
     private boolean directionRight = true;
+
     @Override
     protected void initInput(){
         Input input = FXGL.getInput();
@@ -305,6 +315,7 @@ public class Main extends GameApplication {
         numberOfShots.textProperty().bind(FXGL.getWorldProperties().intProperty("numberOfShots").asString());
 
         FXGL.getGameScene().addUINode(numberOfShots);
+
 
 
     // UI & LABELS & BACKGROUND
