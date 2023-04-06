@@ -50,7 +50,7 @@ public class MegaManFactory implements EntityFactory {
     public Entity newEnemy(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.ENEMY)
-                .viewWithBBox("enemy.png")
+                .viewWithBBox("enemy.png").scale(1.3,1.3)
                 .with(new CollidableComponent(true))
                 .build();
     }

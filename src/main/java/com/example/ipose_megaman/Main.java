@@ -100,17 +100,11 @@ public class Main extends GameApplication {
         viewport.bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
 
         setLEVEL();
-
-
     }
-
-
 
     @Override
     protected void initPhysics() {
         getPhysicsWorld().setGravity(0, 1200);
-
-
 
 //        COLLISION HANDLER
 //        FXGL.getPhysicsWorld()
@@ -184,8 +178,9 @@ public class Main extends GameApplication {
             player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(3500, 950));
         }else if (LEVEL == 2){
             FXGL.getGameScene().setBackgroundRepeat("background2.jpg");
-            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(6900, 650));
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(6900, 950));
         }else if (LEVEL == 3){
+            FXGL.getGameScene().setBackgroundColor(Color.BLUE);
                     getDialogService().showInputBox("Voer je naam in", answer -> {
                         PrintWriter out = null;
                         try {
@@ -199,8 +194,7 @@ public class Main extends GameApplication {
                         }
                         getGameController().gotoMainMenu();
                     }
-                );
-
+                    );
         }
     }
 
