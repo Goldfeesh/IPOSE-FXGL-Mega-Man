@@ -32,6 +32,12 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.text.DecimalFormat;
 import java.util.Map;
 
@@ -153,8 +159,19 @@ public class Main extends GameApplication {
             protected void onCollisionBegin(Entity player, Entity enddoor) {
                 showMessage("Level complete!", () -> {
                     getGameScene().setBackgroundRepeat("tilesheet.png");
+                    player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+
 
                 });
+
+                PrintWriter out = null;
+                try {
+                    out = new PrintWriter(new BufferedWriter(new FileWriter("highscores.txt", true)));
+                    out.println(FXGL.getWorldProperties().getDouble("levelTime").toString());
+                    out.close();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
