@@ -63,7 +63,7 @@ public class PlayerComponent extends Component {
         entityBuilder()
                 .type(BULLET)
                 .at(positionX, positionY)
-                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.BLACK))
+                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.WHITE))
                 .collidable()
                 .with(new ProjectileComponent(new Point2D(1.0, 0.0), 650.0))
                 .buildAndAttach();
@@ -73,7 +73,7 @@ public class PlayerComponent extends Component {
         entityBuilder()
                 .type(BULLET)
                 .at(positionX, positionY)
-                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.BLACK))
+                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.WHITE))
                 .collidable()
                 .with(new ProjectileComponent(new Point2D(-1.0, 0.0), 650.0))
                 .buildAndAttach();

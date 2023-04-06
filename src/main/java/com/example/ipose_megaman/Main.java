@@ -45,13 +45,14 @@ import java.util.Map;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameWorld;
 import static com.example.ipose_megaman.EntityTypes.BULLET;
+import static com.example.ipose_megaman.EntityTypes.ENEMY;
 import static javafx.application.Platform.exit;
 
 public class Main extends GameApplication {
 
     private Entity player;
 
-    private int LEVEL = 2;
+    private int LEVEL = 0;
 
     @Override
     protected void initSettings(GameSettings settings) {
@@ -79,7 +80,7 @@ public class Main extends GameApplication {
 //        }, Duration.millis(500));
         getGameWorld().addEntityFactory(new MegaManFactory());
 
-        FXGL.setLevelFromMap("level4.tmx");
+        FXGL.setLevelFromMap("level.tmx");
 
 //        if (LEVEL == 0) {
 //
@@ -90,13 +91,13 @@ public class Main extends GameApplication {
                 .view(new Rectangle(30, 50, Color.BLUE))
                 .buildAndAttach();*/
 
-        player = FXGL.getGameWorld().spawn("player", 50, 650);
+        player = FXGL.getGameWorld().spawn("player", 350, 950);
 
         Viewport viewport = getGameScene().getViewport();
-        viewport.setBounds(-1500, -500, 250 * 70, 1050);
+        viewport.setBounds(-1500, -500, 250 * 70, 1400);
         viewport.bindToEntity(player, getAppWidth() / 2.0, getAppHeight() / 2.0);
 
-        getGameScene().setBackgroundRepeat("clouds.jpg");
+        setLEVEL();
 
 
     }
@@ -138,7 +139,7 @@ public class Main extends GameApplication {
                 }
                 int updatedNumberOfLives = currentNumberOfLives - 1;
                 set("numberOfLives",updatedNumberOfLives);
-                player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+                setLEVEL();
 
 
             }
@@ -159,7 +160,8 @@ public class Main extends GameApplication {
             protected void onCollisionBegin(Entity player, Entity enddoor) {
                 showMessage("Level complete!", () -> {
                     getGameScene().setBackgroundRepeat("tilesheet.png");
-                    player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+                    LEVEL += 1;
+                    setLEVEL();
 
 
                 });
@@ -177,12 +179,20 @@ public class Main extends GameApplication {
     }
 
     public void setLEVEL(){
-        if (LEVEL == 1){
-            FXGL.getGameScene().setBackgroundRepeat("background2");
-            //player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
-        }if (LEVEL == 2){
+
+        set("numberOfShots",10);
+        if (LEVEL == 0){
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(350, 950));
+            getGameScene().setBackgroundRepeat("background2.jpg");
+        }
+        else if (LEVEL == 1){
+            FXGL.getGameScene().setBackgroundRepeat("background1.jpg");
+            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(3500, 950));
+        }else if (LEVEL == 2){
             //FXGL.getGameScene().setBackgroundRepeat("background3");
             //player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+        }else if (LEVEL == 3){
+
         }
     }
 
@@ -236,7 +246,10 @@ public class Main extends GameApplication {
 
             @Override
             protected void onActionBegin() {
+                int currentNumberOfShots = (int) geti("numberOfShots");
                 if (canShoot) {
+                    if (currentNumberOfShots == 0){return;}
+
                     FXGL.play("shoot.wav");
                     if (directionRight) {
                         player.getComponent(PlayerComponent.class).shoot(player.getRightX(), player.getBottomY() - player.getHeight() / 2);
@@ -244,6 +257,10 @@ public class Main extends GameApplication {
                         player.getComponent(PlayerComponent.class).shootLeft(player.getRightX(), player.getBottomY() - player.getHeight() / 2);
                     }
                     canShoot = false;
+
+                    int updatedNumberOfShots = currentNumberOfShots - 1;
+                    set("numberOfShots",updatedNumberOfShots);
+
                 }
             }
 
@@ -279,6 +296,15 @@ public class Main extends GameApplication {
 
         FXGL.getGameScene().addUINode(time);
 
+        Text numberOfShots = new Text();
+        numberOfShots.setTranslateX(1000);
+        numberOfShots.setTranslateY(50);
+        numberOfShots.setFont(Font.font("Arial", FontWeight.BOLD, 24)); // set the font
+        numberOfShots.setFill(Color.WHITE); // set the fill color
+
+        numberOfShots.textProperty().bind(FXGL.getWorldProperties().intProperty("numberOfShots").asString());
+
+        FXGL.getGameScene().addUINode(numberOfShots);
 
 
     // UI & LABELS & BACKGROUND
@@ -292,6 +318,8 @@ public class Main extends GameApplication {
 
         vars.put("numberOfLives",3);
         vars.put("levelTime", 0.0);
+        vars.put("numberOfShots",10);
+
         // GAME VARIABLES
     }
 
