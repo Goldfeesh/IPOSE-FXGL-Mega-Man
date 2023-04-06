@@ -21,7 +21,7 @@ import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 public class MegaManFactory implements EntityFactory {
     @Spawns("platform")
     public Entity newPlatform(SpawnData data) {
-        return FXGL.entityBuilder()
+        return FXGL.entityBuilder(data)
                 //Dit zijn blijkbaar de "key height" en "key width"
                 .type(EntityTypes.PLATFORM)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
@@ -51,7 +51,16 @@ public class MegaManFactory implements EntityFactory {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.ENEMY)
                 .viewWithBBox(new Circle(35, 35,35, Color.RED))
-                .with (new CollidableComponent(true))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+
+    @Spawns("enddoor")
+    public Entity newEndDoor(SpawnData data) {
+        return FXGL.entityBuilder(data)
+                .type(EntityTypes.ENDDOOR)
+                .viewWithBBox(new Rectangle(70, 70, Color.GREEN))
+                .with(new CollidableComponent(true))
                 .build();
     }
 }

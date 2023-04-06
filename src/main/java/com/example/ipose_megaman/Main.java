@@ -115,7 +115,7 @@ public class Main extends GameApplication {
 
         FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER,EntityTypes.PLATFORM) {
             @Override
-            protected void onCollision(Entity Player, Entity Platform) {
+            protected void onCollision(Entity player, Entity platform) {
             }
         });
 
@@ -145,6 +145,16 @@ public class Main extends GameApplication {
             protected void onCollision(Entity bullet, Entity enemy) {
                 enemy.removeFromWorld();
                 bullet.removeFromWorld();
+            }
+        });
+
+        FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER,EntityTypes.ENDDOOR) {
+            @Override
+            protected void onCollisionBegin(Entity player, Entity enddoor) {
+                showMessage("Level complete!", () -> {
+                    getGameScene().setBackgroundRepeat("tilesheet.png");
+                    player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+                });
             }
         });
     }
