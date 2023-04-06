@@ -151,6 +151,12 @@ public class Main extends GameApplication {
             }
         });
 
+        FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.BULLET, EntityTypes.PLATFORM) {
+            @Override
+            protected void onCollision(Entity bullet, Entity platform) {
+                bullet.removeFromWorld();
+            }
+        });
         FXGL.getPhysicsWorld().addCollisionHandler(new CollisionHandler(EntityTypes.PLAYER,EntityTypes.ENDDOOR) {
             @Override
             protected void onCollisionBegin(Entity player, Entity enddoor) {

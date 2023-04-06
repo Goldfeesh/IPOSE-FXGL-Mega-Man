@@ -25,6 +25,7 @@ public class MegaManFactory implements EntityFactory {
                 //Dit zijn blijkbaar de "key height" en "key width"
                 .type(EntityTypes.PLATFORM)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .collidable()
                 .with(new PhysicsComponent())
                 .build();
     }
