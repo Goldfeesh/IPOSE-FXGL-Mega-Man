@@ -45,12 +45,12 @@ public class Main extends GameApplication {
 
     private Entity player;
 
-    private static final int LEVEL = 2;
+    private int LEVEL = 2;
 
     @Override
     protected void initSettings(GameSettings settings) {
-        settings.setHeight(10 * 70);
-        settings.setWidth(15 * 70);
+        settings.setHeight(720);
+        settings.setWidth(1280);
         settings.setTitle("Tetris Man 2");
         settings.setVersion("1.0");
         settings.setMainMenuEnabled(true);
@@ -153,10 +153,20 @@ public class Main extends GameApplication {
             protected void onCollisionBegin(Entity player, Entity enddoor) {
                 showMessage("Level complete!", () -> {
                     getGameScene().setBackgroundRepeat("tilesheet.png");
-                    player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+
                 });
             }
         });
+    }
+
+    public void setLEVEL(){
+        if (LEVEL == 1){
+            FXGL.getGameScene().setBackgroundRepeat("background2");
+            //player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+        }if (LEVEL == 2){
+            //FXGL.getGameScene().setBackgroundRepeat("background3");
+            //player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 650));
+        }
     }
 
     private boolean canShoot = true;
