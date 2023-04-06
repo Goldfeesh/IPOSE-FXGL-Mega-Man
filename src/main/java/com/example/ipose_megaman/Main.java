@@ -281,7 +281,7 @@ public class Main extends GameApplication {
     @Override
     protected void initUI() {
         Text numberOfLives = new Text();
-        numberOfLives.setTranslateX(50);
+        numberOfLives.setTranslateX(170);
         numberOfLives.setTranslateY(100);
         numberOfLives.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 40)); // set the font
         numberOfLives.setFill(Color.RED); // set the fill color
@@ -291,8 +291,8 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(numberOfLives);
 
         Text time = new Text();
-        time.setTranslateX(50);
-        time.setTranslateY(50);
+        time.setTranslateX(150);
+        time.setTranslateY(40);
         time.setFont(Font.font("Arial", FontWeight.BOLD, 24)); // set the font
         time.setFill(Color.WHITE); // set the fill color
 
@@ -301,17 +301,35 @@ public class Main extends GameApplication {
         FXGL.getGameScene().addUINode(time);
 
         Text numberOfShots = new Text();
-        numberOfShots.setTranslateX(1000);
-        numberOfShots.setTranslateY(50);
-        numberOfShots.setFont(Font.font("Arial", FontWeight.BOLD, 24)); // set the font
-        numberOfShots.setFill(Color.WHITE); // set the fill color
+        numberOfShots.setTranslateX(190);
+        numberOfShots.setTranslateY(150);
+        numberOfShots.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 40)); // set the font
+        numberOfShots.setFill(Color.BLUEVIOLET); // set the fill color
 
         numberOfShots.textProperty().bind(FXGL.getWorldProperties().intProperty("numberOfShots").asString());
 
         FXGL.getGameScene().addUINode(numberOfShots);
 
+        Text lives = new Text("LIVES:");
+        lives.setTranslateX(30);
+        lives.setTranslateY(100);
+        lives.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 40)); // set the font
+        lives.setFill(Color.WHITE);
+        FXGL.getGameScene().addUINode(lives);
 
+        Text shots = new Text("SHOTS:");
+        shots.setTranslateX(30);
+        shots.setTranslateY(150);
+        shots.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 40)); // set the font
+        shots.setFill(Color.WHITE);
+        FXGL.getGameScene().addUINode(shots);
 
+        Text timer = new Text("TIME:");
+        timer.setTranslateX(30);
+        timer.setTranslateY(50);
+        timer.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 40)); // set the font
+        timer.setFill(Color.WHITE);
+        FXGL.getGameScene().addUINode(timer);
     // UI & LABELS & BACKGROUND
         // MAKE LABEL:  Label myText = new Label("");
         // LINK TO GAME VAR:  myText.textProperty().bind(FXGL.getWorldProperties().intProperty("kills").asString());
