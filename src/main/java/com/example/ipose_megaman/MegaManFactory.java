@@ -11,9 +11,10 @@ import com.almasb.fxgl.physics.HitBox;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
+import com.almasb.fxgl.scene3d.Pyramid;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.*;
 
 import static com.almasb.fxgl.dsl.FXGL.entityBuilder;
 
@@ -33,12 +34,12 @@ public class MegaManFactory implements EntityFactory {
         PhysicsComponent physics = new PhysicsComponent();
         physics.setBodyType(BodyType.DYNAMIC);
         physics.setFixtureDef(new FixtureDef().friction(0.0f));
-        physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 16), BoundingShape.box(6, 8)));
+        physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 16), BoundingShape.box(14, 8)));
 
         PlayerComponent playerComponent = new PlayerComponent();
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.PLAYER)
-                .viewWithBBox("MegaManIdle.png").scale(2.5,2.5)
+                .viewWithBBox("MegaManIdle.png").scale(2.5,3.5)
                 .with(physics)
                 .collidable()
                 .with(playerComponent)
@@ -49,7 +50,7 @@ public class MegaManFactory implements EntityFactory {
     public Entity newEnemy(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.ENEMY)
-                .viewWithBBox(new Rectangle(70, 70, Color.RED))
+                .viewWithBBox(new Circle(35, 35,35, Color.RED))
                 .with (new CollidableComponent(true))
                 .build();
     }

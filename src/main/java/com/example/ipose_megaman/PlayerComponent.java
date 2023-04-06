@@ -57,13 +57,25 @@ public class PlayerComponent extends Component {
         physics.setVelocityX(0);
     }
 
+
+
     void shoot(double positionX, double positionY) {
         entityBuilder()
                 .type(BULLET)
                 .at(positionX, positionY)
-                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.BLUE))
+                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.BLACK))
                 .collidable()
-                .with(new ProjectileComponent(new Point2D(1.0, 0.0), 350.0))
+                .with(new ProjectileComponent(new Point2D(1.0, 0.0), 650.0))
+                .buildAndAttach();
+    }
+
+    void shootLeft(double positionX, double positionY) {
+        entityBuilder()
+                .type(BULLET)
+                .at(positionX, positionY)
+                .viewWithBBox(new Circle(10.0, 5.0, 5.0, Color.BLACK))
+                .collidable()
+                .with(new ProjectileComponent(new Point2D(-1.0, 0.0), 650.0))
                 .buildAndAttach();
     }
 }
