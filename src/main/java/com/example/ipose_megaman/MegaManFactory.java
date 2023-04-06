@@ -59,7 +59,7 @@ public class MegaManFactory implements EntityFactory {
     public Entity newEndDoor(SpawnData data) {
         return FXGL.entityBuilder(data)
                 .type(EntityTypes.ENDDOOR)
-                .viewWithBBox(new Rectangle(70, 70, Color.GREEN))
+                .viewWithBBox("Black_hole.png")
                 .with(new CollidableComponent(true))
                 .build();
     }
